@@ -6,7 +6,7 @@ const Join = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [passWord, setPassword] = useState("");
-  const [passWordRe, setPasswordRe] = useState("");
+  // const [passWordRe, setPasswordRe] = useState("");
 
   // 회원가입 함수
   const UserJoin = async () => {
