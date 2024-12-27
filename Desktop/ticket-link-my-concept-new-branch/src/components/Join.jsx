@@ -1,4 +1,33 @@
+import { useState } from "react";
+import supabase from "../supabaseClient";
+
 const Join = () => {
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [passWord, setPassword] = useState("");
+  const [passWordRe, setPasswordRe] = useState("");
+
+  // 회원가입 함수
+  const UserJoin = async () => {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        name: "name",
+        phone: "phoneNumber",
+        email: "email",
+        password: "password",
+      });
+
+      if (error) {
+        alert("에러:", error.message);
+      } else {
+        alert("성공:", data);
+      }
+    } catch (err) {
+      alert("예상:", err);
+    }
+  };
+
   return (
     <div>
       <div
@@ -15,11 +44,11 @@ const Join = () => {
           src="/public/ticketLinkLogoImg.png"
           style={{
             margin: "0 auto",
-            maxWidth: "200px", // 최대 크기를 200px로 제한
-            minWidth: "120px", // 최소 크기를 120px로 설정
-            height: "auto", // 비율 유지
+            maxWidth: "200px",
+            minWidth: "120px",
+            height: "auto",
             cursor: "pointer",
-            marginTop: "8vh", // 화면 높이에 비례한 상단 간격
+            marginTop: "8vh",
           }}
         />
 
@@ -29,7 +58,7 @@ const Join = () => {
           }}
         >
           <input
-            type="password"
+            type="text"
             placeholder="이름을 입력해주세요"
             style={{
               width: "350px",
@@ -37,6 +66,10 @@ const Join = () => {
               fontSize: "17px",
               borderRadius: "7px",
               height: "27px",
+            }}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
             }}
           />
           <br />
@@ -51,6 +84,10 @@ const Join = () => {
               height: "27px",
               marginTop: "12px",
             }}
+            value={phoneNumber}
+            onChange={(e) => {
+              setPhoneNumber(e.target.value);
+            }}
           />
           <br />
           <input
@@ -63,6 +100,10 @@ const Join = () => {
               borderRadius: "7px",
               height: "27px",
               marginTop: "12px",
+            }}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
             }}
           />
           <br />
@@ -77,6 +118,10 @@ const Join = () => {
               height: "27px",
               marginTop: "12px",
             }}
+            value={passWord}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
           <br />
           <input
@@ -90,6 +135,10 @@ const Join = () => {
               height: "27px",
               marginTop: "12px",
             }}
+            value={setPasswordRe}
+            onChange={(e) => {
+              setPasswordRe(e.target.value);
+            }}
           />
           <br />
           <button
@@ -101,6 +150,7 @@ const Join = () => {
               marginTop: "16px",
               fontWeight: "bold",
             }}
+            onClick={UserJoin()}
           >
             회원가입
           </button>
